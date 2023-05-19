@@ -18,4 +18,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/insert', [App\Http\Controllers\CopyTextController::class, 'insertText'])->name('insert_text');
+Route::post('/insert', [App\Http\Controllers\CopyTextController::class, 'insertText'])->name('insert_text');

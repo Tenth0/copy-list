@@ -13,8 +13,8 @@ class TextCategory extends Model
     protected $table = 'text_categories';
     protected $fillable = [
         'id',
-        'category_id_1',
-        'category_id_2',
-        'category_id_3'
+        'category_id_first',
+        'category_id_second',
+        'category_id_third'
     ];
 }

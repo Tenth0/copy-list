@@ -26,8 +26,10 @@ class CreateTextRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required', 'max:11'],
             'user_id' => ['required', 'max:11'],
+            'category_name_first' => ['nullable', 'max:11'],
+            'category_name_second' => ['nullable', 'max:11'],
+            'category_name_third' => ['nullable', 'max:11'],
             'text_content' => ['required_if:AG_M_KAI_KBN,1', 'max:100'],
         ];
     }

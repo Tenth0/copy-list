@@ -17,4 +17,8 @@ class TextCategory extends Model
         'category_id_second',
         'category_id_third'
     ];
+
+    public function saveCategory(array $categoryIds): void {
+        $this->create($categoryIds);
+    }
 }

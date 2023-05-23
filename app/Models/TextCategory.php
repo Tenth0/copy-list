@@ -12,13 +12,13 @@ class TextCategory extends Model
     public $timestamps = false;
     protected $table = 'text_categories';
     protected $fillable = [
-        'id',
+        'text_id',
         'category_id_first',
         'category_id_second',
         'category_id_third'
     ];
 
-    public function saveCategory(array $categoryIds): void {
-        $this->create($categoryIds);
+    public function saveCategory(array $textCategoryData): void {
+        $this->create($textCategoryData);
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
-class Category extends Model
+class UserCategory extends Model
 {
     use HasFactory;
     public $timestamps = false;

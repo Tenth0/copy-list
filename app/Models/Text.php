@@ -42,4 +42,13 @@ class Text extends Model
             ->join('text_category','user_id',$user_id)
             ->get();
     }
+
+    // 登録するデータのテキストIDを取得
+    public function getLastInsertId(int $user_id) {
+        return $this->query()
+        ->select('id')
+        ->where('user_id',$user_id)
+        ->latest('id')
+        ->first();
+    }
 }

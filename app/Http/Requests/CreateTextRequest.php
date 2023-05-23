@@ -15,7 +15,7 @@ class CreateTextRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,11 +26,22 @@ class CreateTextRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'max:11'],
             'category_name_first' => ['nullable', 'max:11'],
             'category_name_second' => ['nullable', 'max:11'],
             'category_name_third' => ['nullable', 'max:11'],
             'text_content' => ['required'],
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'text_content.required' => 'テキストは必須です',
         ];
     }
 }

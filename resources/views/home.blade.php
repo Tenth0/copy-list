@@ -15,7 +15,14 @@
                 <div class="card-body">
                     {{ $text->text_content }}
                 </div>
-                <div class="card-footer">
+                <div class="card-footer card-flex">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">{{ $text->category_id_first }}</li>
+                            <li class="breadcrumb-item">{{ $text->category_id_second }}</li>
+                            <li class="breadcrumb-item">{{ $text->category_id_third }}</li>
+                        </ol>
+                    </nav>
                     <button id="copy-btn-{{$i}}" type="button" class="btn btn-primary copy-btn" data-text="{{ $text->text_content }}" onclick="copyText(this)">
                         コピーする
                     </button>

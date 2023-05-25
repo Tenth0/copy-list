@@ -2,17 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserCategory;
+use App\Models\Text;
+use App\Models\TextCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    private $userCategoryModel;
+    private $textModel;
+    private $textCategoryModel;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(
+        UserCategory $userCategoryModel,
+        Text $textModel,
+        TextCategory $textCategoryModel,
+    )
     {
+        $this->userCategoryModel = $userCategoryModel;
+        $this->textModel = $textModel;
+        $this->textCategoryModel = $textCategoryModel;
         $this->middleware('auth');
     }
 
@@ -23,6 +37,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $userId = (int) auth()->id();
+        $texts = $this->textModel->getUserTextData($userId);
+        $categoryNames = $this->userCategoryModel->getUserCategoryNames($userId);
+        return view(
+            'home',
+            [
+                'categories' => $categoryNames,
+                'texts' => $texts,                
+            ]
+        );
     }
 }

@@ -21,7 +21,8 @@ class Text extends Model
         'user_id',
         'title',
         'category_id',
-        'text_content'
+        'text_content',
+        'is_delete'
     ];
 
     protected $hidden = [];

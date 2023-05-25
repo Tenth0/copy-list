@@ -12,7 +12,7 @@
                         <label for="title" class="col-form-label">タイトル：</label>
                         <input type="text" class="form-control" id="title" name="title"></input>
                     </div>
-                    @if(!empty($categories))
+                    @if(count($categories) >= 1)
                     <div class="mb-3">
                         <label for="category_name_first" class="col-form-label">カテゴリー１：</label>
                         <select name="category_name_first">

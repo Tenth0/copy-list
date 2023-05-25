@@ -21,6 +21,8 @@
                             @endforeach
                         </select>
                     </div>
+                    @endif
+                    @if(count($categories) >= 2)
                     <div class="mb-3">
                         <label for="category_name_second" class="col-form-label">カテゴリー２：</label>
                         <select name="category_name_second">
@@ -29,6 +31,8 @@
                             @endforeach
                         </select>
                     </div>
+                    @endif
+                    @if(count($categories) >= 3)
                     <div class="mb-3">
                         <label for="category_name_third" class="col-form-label">カテゴリー３：</label>
                         <select name="category_name_third">

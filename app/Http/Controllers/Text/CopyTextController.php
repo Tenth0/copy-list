@@ -29,17 +29,18 @@ class CopyTextController extends Controller
         $this->middleware('auth');
     }
 
-    public function insertText(CreateTextRequest $request)//: RedirectResponse
+    public function insertText(CreateTextRequest $request): RedirectResponse
     {
         $userId = (int) auth()->id();
         $textData = [
             'user_id' => $userId,
+            'title' => $request['title'],
             'text_content' => $request['text_content'],
         ];
         
         $this->textModel->saveText($textData);
 
-        $textId = $this->textModel->getLastInsertId($userId)->id;
+        $textId = $this->textModel->getLastInsertId($userId);
         $categoryIdFirst = isset($request['category_name_first'])   ? $this->userCategoryModel->getCategoryId($request['category_name_first']) : null;
         $categoryIdSecond = isset($request['category_name_second']) ? $this->userCategoryModel->getCategoryId($request['category_name_second']) : null;
         $categoryIdThird = isset($request['category_name_third'])   ? $this->userCategoryModel->getCategoryId($request['category_name_third']) : null;
@@ -47,7 +48,7 @@ class CopyTextController extends Controller
             'text_id' => $textId,
             'category_id_first' => $categoryIdFirst,
             'category_id_second' => $categoryIdSecond,
-           'category_id_third' => $categoryIdThird 
+            'category_id_third' => $categoryIdThird 
         ];        
         $this->textCategoryModel->saveCategory($textCategoryData);
         return redirect()->route('home')->with('insert-success', '追加が完了しました');

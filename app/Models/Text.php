@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
 class Text extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory ;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +19,7 @@ class Text extends Model
     protected $fillable = [
         'id',
         'user_id',
+        'title',
         'category_id',
         'text_content'
     ];
@@ -44,11 +44,26 @@ class Text extends Model
     }
 
     // 登録するデータのテキストIDを取得
-    public function getLastInsertId(int $user_id) {
+    public function getLastInsertId(int $user_id): int {
         return $this->query()
         ->select('id')
         ->where('user_id',$user_id)
         ->latest('id')
-        ->first();
+        ->first()
+        ->id;
+    }
+
+    public function getUserTextData($userId): Collection {
+        return $this->query()
+        ->select(
+            'texts.text_content',
+            'categories.category_id_first',
+            'categories.category_id_second',
+            'categories.category_id_third'
+        )
+        ->where('texts.user_id', $userId)
+        ->join('text_categories as categories','texts.id','=','categories.text_id')
+        ->orderBy('texts.id')
+        ->get();
     }
 }

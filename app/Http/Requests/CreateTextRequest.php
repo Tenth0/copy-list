@@ -26,6 +26,7 @@ class CreateTextRequest extends FormRequest
     public function rules()
     {
         return [
+            'title' => ['required','max:255'],
             'category_name_first' => ['nullable', 'max:11'],
             'category_name_second' => ['nullable', 'max:11'],
             'category_name_third' => ['nullable', 'max:11'],
@@ -41,6 +42,7 @@ class CreateTextRequest extends FormRequest
     public function messages()
     {
         return [
+            'title.required' => 'タイトルは必須です',
             'text_content.required' => 'テキストは必須です',
         ];
     }

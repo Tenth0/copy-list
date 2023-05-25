@@ -57,6 +57,7 @@ class Text extends Model
     public function getUserTextData($userId): Collection {
         return $this->query()
         ->select(
+            'texts.title',
             'texts.text_content',
             'categories.category_id_first',
             'categories.category_id_second',

@@ -18,6 +18,10 @@ class UserCategory extends Model
         'user_id'
     ];
 
+    public function saveUserCategory(array $userCategoryData): void {
+        $this->create($userCategoryData);
+    }
+
     public function getCategoryId(int $category): Collection {
         return $this->select('id')->where('category_name',$category)->get();
     }

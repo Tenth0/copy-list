@@ -16,8 +16,9 @@
                     <div class="mb-3">
                         <label for="category_name_first" class="col-form-label">カテゴリー１：</label>
                         <select name="category_name_first">
+                            <option value="">カテゴリーを選択できます</option>
                             @foreach ($categories as $category)
-                            <option value="{{$category}}">{{ $category }}</option>
+                            <option value="{{$category->category_name}}">{{ $category->category_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -26,8 +27,9 @@
                     <div class="mb-3">
                         <label for="category_name_second" class="col-form-label">カテゴリー２：</label>
                         <select name="category_name_second">
+                            <option value="">カテゴリーを選択できます</option>
                             @foreach ($categories as $category)
-                            <option value="{{$category}}">{{ $category }}</option>
+                            <option value="{{$category->category_name}}">{{ $category->category_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -36,8 +38,9 @@
                     <div class="mb-3">
                         <label for="category_name_third" class="col-form-label">カテゴリー３：</label>
                         <select name="category_name_third">
+                            <option value="">カテゴリーを選択できます</option>
                             @foreach ($categories as $category)
-                            <option value="{{$category}}">{{ $category }}</option>
+                            <option value="{{$category->category_name}}">{{ $category->category_name }}</option>
                             @endforeach
                         </select>
                     </div>

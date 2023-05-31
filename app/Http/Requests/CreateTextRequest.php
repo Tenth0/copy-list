@@ -26,11 +26,11 @@ class CreateTextRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required','max:255'],
-            'category_name_first' => ['nullable', 'max:11'],
-            'category_name_second' => ['nullable', 'max:11'],
-            'category_name_third' => ['nullable', 'max:11'],
-            'text_content' => ['required'],
+            'title'                => ['required', 'max:255'],
+            'category_name_first'  => ['nullable', 'max:255'],
+            'category_name_second' => ['nullable', 'max:255'],
+            'category_name_third'  => ['nullable', 'max:255'],
+            'text_content'         => ['required'],
         ];
     }
 

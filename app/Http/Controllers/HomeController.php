@@ -39,11 +39,11 @@ class HomeController extends Controller
     {
         $userId = (int) auth()->id();
         $texts = $this->textModel->getUserTextData($userId);
-        $categoryNames = $this->userCategoryModel->getUserCategoryNames($userId);
+        $category = $this->userCategoryModel->getUserCategory($userId);
         return view(
             'home',
             [
-                'categories' => $categoryNames,
+                'categories' => $category,
                 'texts' => $texts,                
             ]
         );

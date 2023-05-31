@@ -26,9 +26,9 @@ class UserCategory extends Model
         return $this->select('id')->where('category_name',$category)->get();
     }
 
-    public function getUserCategoryNames(int $userId): Collection {
+    public function getUserCategory(int $userId): Collection {
         return $this->query()
-            ->select('category_name')
+            ->select('category_name','id')
             ->where('user_id',$userId)
             ->orderBy('id')
             ->get();

@@ -20,3 +20,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/insert_text', [App\Http\Controllers\Text\CopyTextController::class, 'insertText'])->name('insert_text');
+Route::post('/insert_category', [App\Http\Controllers\Category\CategoryController::class, 'insertCategory'])->name('insert_category');

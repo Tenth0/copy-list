@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Text;
+namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserCategory;
@@ -28,7 +28,7 @@ class CategoryController extends Controller
     {
         $categoryData = [
             'category_name' => $request['category'],
-            'id' => auth()->id()
+            'user_id' => auth()->id()
         ];
 
         $this->userCategoryModel->saveUserCategory($categoryData);

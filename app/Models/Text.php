@@ -68,4 +68,36 @@ class Text extends Model
         ->orderBy('texts.id')
         ->get();
     }
+
+    public function searchText($userId, $searchTitle, $searchCategory) {
+        $query = $this->query()
+        ->select(
+            'texts.title',
+            'texts.text_content',
+            'categories.category_id_first',
+            'categories.category_id_second',
+            'categories.category_id_third'
+        )
+        ->where('texts.user_id', $userId);
+        $this->searchTitle($query, $searchTitle);
+        $this->searchCategory($query, $searchCategory);
+        $query->join('text_categories as categories','texts.id','=','categories.text_id')
+        ->orderBy('texts.id')
+        ->get();
+        return $query->get();
+    }
+
+    function searchTitle($query, $searchTitle) {
+        if (isset($searchTitle)) {
+            return $query->where('texts.title', 'like', "%$searchTitle%");
+        }
+    }
+
+    function searchCategory($query, $searchCategory) {
+        if (isset($searchCategory)) {
+            return $query->where('categories.category_id_first', 'like', "%$searchCategory%")
+            ->orWhere('categories.category_id_second', 'like', "%$searchCategory%")
+            ->orWhere('categories.category_id_third', 'like', "%$searchCategory%");
+        }
+    }
 }

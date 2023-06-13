@@ -70,4 +70,11 @@ class CopyTextController extends Controller
             ]
         );
     }
+
+    public function deleteText(Request $request)
+    {
+        $textId = $request['id'];
+        $this->textModel->deleteText($textId);
+        return redirect()->route('home')->with('delete-success', '削除が完了しました');
+    }
 }

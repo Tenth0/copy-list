@@ -44,6 +44,9 @@
                         <button id="copy-btn-{{$i}}" type="button" class="btn btn-primary copy-btn" data-text="{{ $text->text_content }}" onclick="copyText(this)">
                             コピーする
                         </button>
+                        <button id="copy-btn-{{$i}}" type="button" class="btn btn-primary copy-btn" data-text="{{ $text->id }}" onclick="deleteText(this)">
+                            削除
+                        </button>
                     </div>
                 </div>
             </div>
@@ -61,6 +64,23 @@
         navigator.clipboard.writeText(textToCopy).then(
             () => {
                 alert("コピーしました")
+            },
+            () => {
+                errorToast("失敗しました")
+            }
+        );
+    }
+
+    function deleteText(element) {
+        if(!confirm('本当に削除しますか？')){
+            return false;
+        }
+        const textId = element.getAttribute('data-text');
+        const url = "{{ route('delete_text') }}?id=" + textId;
+        fetch(url).then(
+            () => {
+                alert("削除しました")
+                location.reload();
             },
             () => {
                 errorToast("失敗しました")

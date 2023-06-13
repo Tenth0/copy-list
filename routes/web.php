@@ -21,4 +21,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/text/search{title?}{category?}', [App\Http\Controllers\Text\CopyTextController::class, 'searchText'])->name('search_text');
 Route::post('/insert_text', [App\Http\Controllers\Text\CopyTextController::class, 'insertText'])->name('insert_text');
+Route::get('/text/delete{id?}', [App\Http\Controllers\Text\CopyTextController::class, 'deleteText'])->name('delete_text');
 Route::post('/insert_category', [App\Http\Controllers\Category\CategoryController::class, 'insertCategory'])->name('insert_category');

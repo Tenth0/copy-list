@@ -57,6 +57,7 @@ class Text extends Model
     public function getUserTextData($userId): Collection {
         return $this->query()
         ->select(
+            'texts.id',
             'texts.title',
             'texts.text_content',
             'categories.category_id_first',
@@ -64,6 +65,7 @@ class Text extends Model
             'categories.category_id_third'
         )
         ->where('texts.user_id', $userId)
+        ->where('texts.is_delete', 0)
         ->join('text_categories as categories','texts.id','=','categories.text_id')
         ->orderBy('texts.id')
         ->get();
@@ -78,7 +80,9 @@ class Text extends Model
             'categories.category_id_second',
             'categories.category_id_third'
         )
+        ->where('texts.is_delete', 0)
         ->where('texts.user_id', $userId);
+
         $this->searchTitle($query, $searchTitle);
         $this->searchCategory($query, $searchCategory);
         $query->join('text_categories as categories','texts.id','=','categories.text_id')
@@ -99,5 +103,11 @@ class Text extends Model
             ->orWhere('categories.category_id_second', 'like', "%$searchCategory%")
             ->orWhere('categories.category_id_third', 'like', "%$searchCategory%");
         }
+    }
+
+    function deleteText($textId) {
+        return $this->query()
+        ->where('id', $textId)
+        ->update(['is_delete' => 1]);
     }
 }

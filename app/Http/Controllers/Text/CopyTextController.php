@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Auth;
 
 class CopyTextController extends Controller
 {
-    private $userCategoryModel;
-    private $textModel;
-    private $textCategoryModel;
+    private UserCategory $userCategoryModel;
+    private Text $textModel;
+    private TextCategory $textCategoryModel;
 
     public function __construct(
         UserCategory $userCategoryModel,
@@ -38,7 +38,7 @@ class CopyTextController extends Controller
             'title' => $request['title'],
             'text_content' => $request['text_content'],
         ];
-        
+
         $this->textModel->saveText($textData);
 
         $textId = $this->textModel->getLastInsertId($userId);
@@ -49,7 +49,7 @@ class CopyTextController extends Controller
             'text_id' => $textId,
             'category_id_first' => $categoryIdFirst,
             'category_id_second' => $categoryIdSecond,
-            'category_id_third' => $categoryIdThird 
+            'category_id_third' => $categoryIdThird
         ];
         $this->textCategoryModel->saveCategory($textCategoryData);
         return redirect()->route('home')->with('insert-success', '追加が完了しました');
@@ -66,7 +66,7 @@ class CopyTextController extends Controller
             'home',
             [
                 'categories' => $category,
-                'texts' => $texts,                
+                'texts' => $texts,
             ]
         );
     }

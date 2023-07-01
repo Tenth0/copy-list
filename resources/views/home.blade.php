@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <form action="{{route('search_text')}}?title=" + title + "&category=" + category; method="GET">
+    <form action="{{route('search_text')}};" method="GET">
         @csrf
         <div class="form-group">
             <input type="text" name="title" class="form-control" id="searchTitle" placeholder="タイトルを入力してください">
@@ -11,25 +10,32 @@
             <select class="form-control" id="categoryName" name="category">
                 <option value="">全てのカテゴリー</option>
                 @foreach ($categories as $category)
-                <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
+                    <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
                 @endforeach
             </select>
         </div>
-        <button type="submit">検索</button </form>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#textFormModal" data-bs-whatever="@mdo">
-            新規作成
-        </button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#textEditModal" data-bs-whatever="@edit">
-            編集
-        </button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertCategoryModal" data-bs-whatever="@category">
-            カテゴリー作成
-        </button>
-        @foreach($texts as $i => $text)
+        <button type="submit">検索</button>
+    </form>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#textFormModal">
+        新規作成
+    </button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertCategoryModal">
+        カテゴリー作成
+    </button>
+    @foreach($texts as $i => $text)
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ $text->title }}</div>
+                    <div class="card-header">
+                        <div class="row card-flex">
+                            <div class="card-title">
+                                {{ $text->title }}
+                            </div>
+                            <button id="copy-btn-{{$i}}" type="button" class="btn btn-primary copy-btn" data-text="{{ $text->text_content }}" onclick="copyText(this)">
+                                コピーする
+                            </button>
+                        </div>
+                    </div>
                     <div class="card-body">
                         {{ $text->text_content }}
                     </div>
@@ -41,20 +47,16 @@
                                 <li class="breadcrumb-item">{{ $text->category_id_third }}</li>
                             </ol>
                         </nav>
-                        <button id="copy-btn-{{$i}}" type="button" class="btn btn-primary copy-btn" data-text="{{ $text->text_content }}" onclick="copyText(this)">
-                            コピーする
-                        </button>
-                        <button id="copy-btn-{{$i}}" type="button" class="btn btn-primary copy-btn" data-text="{{ $text->id }}" onclick="deleteText(this)">
+                        <button id="copy-btn-{{$i}}" type="button" class="btn btn-secondary copy-btn" data-text="{{ $text->id }}" onclick="deleteText(this)">
                             削除
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-        @endforeach()
-        <div id="toast-container"></div>
-</div>
-@extends('modals.textForm')
+    @endforeach()
+    <div id="toast-container"></div>
+    @extends('modals.textForm')
 @extends('modals.insertCategory')
 @endsection
 

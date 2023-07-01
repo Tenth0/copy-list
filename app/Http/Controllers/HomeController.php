@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\UserCategory;
 use App\Models\Text;
 use App\Models\TextCategory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Tests\TestCase;
 
 class HomeController extends Controller
 {
-    private $userCategoryModel;
-    private $textModel;
-    private $textCategoryModel;
+    private UserCategory $userCategoryModel;
+    private Text $textModel;
     /**
      * Create a new controller instance.
      *
@@ -33,9 +34,9 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $userId = (int) auth()->id();
         $texts = $this->textModel->getUserTextData($userId);
@@ -44,7 +45,7 @@ class HomeController extends Controller
             'home',
             [
                 'categories' => $category,
-                'texts' => $texts,                
+                'texts' => $texts,
             ]
         );
     }
